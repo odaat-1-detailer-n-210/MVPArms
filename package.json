@@ -2,8 +2,6 @@
   "name": "mvp",
   "version": "0.1.0",
   "private": true,
-  "module": "types",
-  "type": "module",
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
@@ -11,11 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^5.2.3",
+    "@million/lint": "^1.0.0-rc.76",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "convex": "^1.13.0",
-    "next": "^14.2.5",
+    "lucide-react": "^0.408.0",
+    "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "tailwind-merge": "^2.4.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/node": "^20",

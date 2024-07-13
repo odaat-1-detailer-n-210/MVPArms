@@ -1,15 +1,13 @@
-// tailwind.config.ts
-import type { Config } from 'tailwindcss'
-import { fontFamily } from "tailwindcss/defaultTheme"
+import type { Config } from "tailwindcss"
 
-const config: Config = {
+const config = {
   darkMode: ["class"],
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-  ],
+	],
   prefix: "",
   theme: {
     container: {
@@ -60,54 +58,23 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      borderWidth: {
-        '16': '16px',
-      },
-      fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
-      },
       keyframes: {
         "accordion-down": {
-          from: { height: '0' },
+          from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: '0' },
-        },
-        wiggle: {
-          '0%, 100%': { transform: 'rotate(-3deg)' },
-          '50%': { transform: 'rotate(3deg)' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-5px)' },
-        },
-        revEngine: {
-          '0%, 100%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.05)' },
-        },
-        drive: {
-          '0%': { transform: 'translateX(-100%)' },
-          '100%': { transform: 'translateX(100%)' },
-        },
-        gauge: {
-          '0%': { transform: 'rotate(-120deg)' },
-          '100%': { transform: 'rotate(120deg)' },
+          to: { height: "0" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        wiggle: 'wiggle 1s ease-in-out infinite',
-        float: 'float 3s ease-in-out infinite',
-        revEngine: 'revEngine 0.5s ease-in-out infinite',
-        drive: 'drive 10s linear infinite',
-        gauge: 'gauge 2s ease-in-out',
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
-} as const
+} satisfies Config
 
 export default config
