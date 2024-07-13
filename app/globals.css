@@ -1,33 +1,246 @@
+/* global.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --primary: #00AE98;
+  --secondary: #FF6B35;
+  --tertiary: #4A5568;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  @apply bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* 3D Button */
+.btn-3d {
+  @apply relative inline-block px-6 py-3 font-bold text-white rounded-lg shadow-lg transition-all duration-300 ease-in-out;
+  background: var(--primary);
+  transform: translateY(0) rotateX(0);
+}
+
+.btn-3d:hover {
+  transform: translateY(-3px) rotateX(15deg);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-3d:active {
+  transform: translateY(-1px) rotateX(5deg);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 3D Card */
+.card-3d {
+  @apply bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-all duration-300 ease-in-out;
+  transform: perspective(1000px) rotateX(0) rotateY(0);
+}
+
+.card-3d:hover {
+  transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Animated Link */
+.link-animated {
+  @apply relative inline-block text-primary;
+}
+
+.link-animated::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ease-in-out;
+}
+
+.link-animated:hover::after {
+  @apply w-full;
+}
+
+/* Loading Spinner */
+.spinner {
+  @apply w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin;
+}
+
+/* Header */
+.header {
+  @apply bg-white dark:bg-gray-800 shadow-md py-4;
+}
+
+.header-content {
+  @apply container mx-auto flex justify-between items-center;
+}
+
+/* Dark mode toggle */
+.dark-mode-toggle {
+  @apply relative inline-block w-12 h-6 rounded-full bg-gray-300 dark:bg-gray-600 transition-colors duration-300 ease-in-out;
+}
+
+.dark-mode-toggle::after {
+  content: '';
+  @apply absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform duration-300 ease-in-out;
+}
+
+.dark .dark-mode-toggle::after {
+  transform: translateX(1.5rem);
+}
+
+/* 3D Navigation Menu */
+.nav-3d {
+  @apply relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.nav-3d-item {
+  @apply block py-2 px-4 transition-transform duration-300 ease-in-out;
+  transform: translateZ(0);
+}
+
+.nav-3d-item:hover {
+  transform: translateZ(20px);
+}
+
+/* Gauge Chart */
+.gauge-chart {
+  @apply relative w-32 h-32;
+}
+
+.gauge-chart-background {
+  @apply absolute inset-0 border-8 border-gray-300 rounded-full;
+  clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%);
+}
+
+.gauge-chart-fill {
+  @apply absolute inset-0 border-8 border-primary rounded-full animate-gauge;
+  clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%);
+}
+
+/* Speedometer Progress */
+.speedometer {
+  @apply relative w-40 h-20 overflow-hidden;
+}
+
+.speedometer-dial {
+  @apply absolute bottom-0 left-1/2 w-80 h-80 border-8 border-gray-300 rounded-full;
+  transform: translateX(-50%) translateY(75%);
+}
+
+.speedometer-needle {
+  @apply absolute bottom-0 left-1/2 w-1 h-20 bg-red-500 origin-bottom;
+  transform: translateX(-50%) rotate(0deg);
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  @apply relative inline-block w-14 h-8;
+}
+
+.toggle-switch input {
+  @apply opacity-0 w-0 h-0;
+}
+
+.toggle-switch-slider {
+  @apply absolute cursor-pointer inset-0 bg-gray-300 transition-all duration-300 ease-in-out rounded-full;
+}
+
+.toggle-switch-slider:before {
+  content: "";
+  @apply absolute h-6 w-6 left-1 bottom-1 bg-white transition-all duration-300 ease-in-out rounded-full;
+}
+
+.toggle-switch input:checked + .toggle-switch-slider {
+  @apply bg-primary;
+}
+
+.toggle-switch input:checked + .toggle-switch-slider:before {
+  transform: translateX(24px);
+}
+
+/* Parallax Container */
+.parallax-container {
+  @apply relative overflow-hidden;
+  perspective: 1000px;
+}
+
+.parallax-layer {
+  @apply absolute inset-0 transition-transform duration-300 ease-out;
+}
+
+/* 3D Model Container */
+.model-3d-container {
+  @apply relative w-full h-64 overflow-hidden;
+  perspective: 1000px;
+}
+
+.model-3d {
+  @apply w-full h-full transition-transform duration-300 ease-in-out;
+  transform-style: preserve-3d;
+}
+
+/* Customizable Theme */
+.theme-custom {
+  --theme-primary: var(--primary);
+  --theme-secondary: var(--secondary);
+  --theme-tertiary: var(--tertiary);
+}
+
+/* Interactive Onboarding */
+.onboarding-step {
+  @apply opacity-0 transition-opacity duration-500 ease-in-out;
+}
+
+.onboarding-step.active {
+  @apply opacity-100;
+}
+
+/* Gesture Control Area */
+.gesture-area {
+  @apply relative w-full h-64 bg-gray-200 dark:bg-gray-700 overflow-hidden;
+  touch-action: none;
+}
+
+/* Responsive 3D Element */
+.responsive-3d {
+  @apply w-full h-auto transition-transform duration-300 ease-in-out;
+  transform: perspective(1000px) rotateY(0deg);
+}
+
+@screen md {
+  .responsive-3d {
+    transform: perspective(1000px) rotateY(15deg);
   }
+}
+
+@screen lg {
+  .responsive-3d {
+    transform: perspective(1000px) rotateY(30deg);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.screen-reader-only {
+  @apply sr-only;
+}
+
+/* Performance Optimized Animation */
+@keyframes optimized-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.optimized-spinner {
+  animation: optimized-spin 1s linear infinite;
+  will-change: transform;
 }
